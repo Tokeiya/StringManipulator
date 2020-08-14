@@ -1,0 +1,2 @@
+# StringManipulator
+String manipulation library
