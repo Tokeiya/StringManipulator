@@ -79,136 +79,132 @@ namespace Tokeiya3.StringManipulator
 			throw new NotImplementedException("ToStringBuilder is not implemented");
 		}
 
-
-		public static StringBuilder ToStringBuilder(this IEnumerable<IEnumerable<string>> source, string separator)
+		public static StringBuilder ToStringBuilder(this IEnumerable<IEnumerable<char>> source, string separator)
 		{
-#warning ToString_Is_NotImpl
-			throw new NotImplementedException("ToString is not implemented");
+#warning ToStringBuilder_Is_NotImpl
+			throw new NotImplementedException("ToStringBuilder is not implemented");
 		}
 
-		public static void Append(this string source, StringBuilder stringBuilder)
+
+		public static StringBuilder Append(this string source, StringBuilder stringBuilder)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 
 		}
 
-		public static void Append(this IEnumerable<char> source, StringBuilder stringBuilder)
+		public static StringBuilder Append(this IEnumerable<char> source, StringBuilder stringBuilder)
 		{
 #warning NotImplemented.
 			throw new NotImplementedException();
 
 		}
 
-		public static void Append(this ReadOnlySpan<char> source, StringBuilder stringBuilder)
+		public static StringBuilder Append(this ReadOnlySpan<char> source, StringBuilder stringBuilder)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void Append(this ReadOnlyMemory<char> source, StringBuilder stringBuilder)
+		public static StringBuilder Append(this ReadOnlyMemory<char> source, StringBuilder stringBuilder)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void Append(this IEnumerable<string> source, char separator, StringBuilder stringBuilder)
+		public static StringBuilder Append(this IEnumerable<string> source,StringBuilder stringBuilder, char separator )
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void Append(this IEnumerable<string> source, string separator, StringBuilder stringBuilder)
+		public static StringBuilder Append(this IEnumerable<string> source, StringBuilder stringBuilder,string separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void Append(this ReadOnlySpan<string> source, char separator, StringBuilder stringBuilder)
+		public static StringBuilder Append(this ReadOnlySpan<string> source, StringBuilder stringBuilder, char separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void Append(this ReadOnlySpan<string> source, string separator, StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-
-		}
-
-		public static void Append(this ReadOnlyMemory<string> source, char separator, StringBuilder stringBUilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void Append(this ReadOnlyMemory<string> source, string separator, StringBuilder stringBUilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void Append(this IEnumerable<IEnumerable<char>> source, char separator,
-			StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void Append(this IEnumerable<IEnumerable<char>> source, string separator,
-			StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void AppendAsLine(this IEnumerable<string> source, char separator, StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void AppendAsLine(this IEnumerable<string> source, string separator, StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void AppendAsLine(this ReadOnlySpan<string> source, char separator, StringBuilder stringBuilder)
-		{
-#warning Append_Is_NotImpl
-			throw new NotImplementedException("Append is not implemented");
-		}
-
-		public static void AppendAsLine(this ReadOnlySpan<string> source, string separator, StringBuilder stringBuilder)
+		public static StringBuilder Append(this ReadOnlySpan<string> source, StringBuilder stringBuilder, string separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 
 		}
 
-		public static void AppendAsLine(this ReadOnlyMemory<string> source, char separator, StringBuilder stringBUilder)
+		public static StringBuilder Append(this ReadOnlyMemory<string> source, StringBuilder stringBuilder, char separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void AppendAsLine(this ReadOnlyMemory<string> source, string separator, StringBuilder stringBUilder)
+		public static StringBuilder Append(this ReadOnlyMemory<string> source, StringBuilder stringBuilder, string separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void AppendAsLine(this IEnumerable<IEnumerable<char>> source, char separator,
-			StringBuilder stringBuilder)
+		public static StringBuilder Append(this IEnumerable<IEnumerable<char>> source, StringBuilder stringBuilder, char separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
 		}
 
-		public static void AppendAsLine(this IEnumerable<IEnumerable<char>> source, string separator,
-			StringBuilder stringBuilder)
+		public static StringBuilder Append(this IEnumerable<IEnumerable<char>> source, StringBuilder stringBuilder, string separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this IEnumerable<string> source, StringBuilder stringBuilder, char separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this IEnumerable<string> source, StringBuilder stringBuilder, string separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this ReadOnlySpan<string> source, StringBuilder stringBuilder, char separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this ReadOnlySpan<string> source, StringBuilder stringBuilder, string separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+
+		}
+
+		public static StringBuilder AppendAsLine(this ReadOnlyMemory<string> source, StringBuilder stringBuilder, char separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this ReadOnlyMemory<string> source, StringBuilder stringBuilder, string separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this IEnumerable<IEnumerable<char>> source, StringBuilder stringBuilder, char separator)
+		{
+#warning Append_Is_NotImpl
+			throw new NotImplementedException("Append is not implemented");
+		}
+
+		public static StringBuilder AppendAsLine(this IEnumerable<IEnumerable<char>> source, StringBuilder stringBuilder, string separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
