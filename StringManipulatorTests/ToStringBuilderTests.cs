@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Xml;
 using ChainingAssertion;
 using Tokeiya3.StringManipulator;
 using Xunit;
@@ -73,34 +75,24 @@ namespace Tokeiya3.StringManipulatorTests
 
 			var array = ExpectedString.Split(' ');
 			array.AppendToStringBuilder(bld,'\t').Is(expected);
-			reset();
 			array.Append("\t").Is(expected);
 
 
-			reset();
-			array.Select(s => s).AppendToStringBuilder(bld, '\t').Is(expected);
-			reset();
-			array.Select(s=>s).AppendToStringBuilder(bld,"\t").Is(expected);
+			array.Select(s => s).AppendToStringBuilder(reset(), '\t').Is(expected);
+			array.Select(s=>s).AppendToStringBuilder(reset(),"\t").Is(expected);
 
-			reset();
-			new ReadOnlySpan<string>(array).AppendToStringBuilder(bld,'\t').Is(expected);
+			new ReadOnlySpan<string>(array).AppendToStringBuilder(reset(),'\t').Is(expected);
 
-			reset();
-			new ReadOnlySpan<string>(array).AppendToStringBuilder(bld, "\t").Is(expected);
+			new ReadOnlySpan<string>(array).AppendToStringBuilder(reset(), "\t").Is(expected);
 
-			reset();
-			new ReadOnlyMemory<string>(array).AppendToStringBuilder(bld, '\t').Is(expected);
+			new ReadOnlyMemory<string>(array).AppendToStringBuilder(reset(), '\t').Is(expected);
 
-			reset();
-			new ReadOnlyMemory<string>(array).AppendToStringBuilder(bld, "\t").Is(expected);
+			new ReadOnlyMemory<string>(array).AppendToStringBuilder(reset(), "\t").Is(expected);
 
 			var seq = array.Select(s => s.ToCharArray().Select(c => c));
 
-			reset();
-			seq.AppendToStringBuilder(bld, '\t').Is(expected);
-
-			reset();
-			seq.AppendToStringBuilder(bld, "\t").Is(expected);
+			seq.AppendToStringBuilder(reset(), '\t').Is(expected);
+			seq.AppendToStringBuilder(reset(), "\t").Is(expected);
 		}
 
 		[Fact]
@@ -112,35 +104,52 @@ namespace Tokeiya3.StringManipulatorTests
 			var array = ExpectedString.Split(' ');
 			var expected = PreInputed + ExpectedString.Replace(' ', '\t') + Environment.NewLine;
 			
-			array.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+			array.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
 			
-			reset();
-			array.AppendToStringBuilder(bld,"\t").Is(expected);
+			array.AppendToStringBuilder(reset(),"\t").Is(expected);
 
-			reset();
 			var span=new ReadOnlySpan<string>(array);
-			span.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+			span.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
 
-			reset();
-			span.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
+			span.AppendToStringBuilderAsLine(reset(),"\t").Is(expected);
 
-			reset();
 			var mem=new ReadOnlyMemory<string>(array);
-			mem.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+			mem.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
 
-			reset();
-			mem.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
+			mem.AppendToStringBuilderAsLine(reset(),"\t").Is(expected);
 
 			var seq = array.Select(s => s.ToCharArray().Select(c => c));
 			
-			reset();
-			seq.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
-
-			reset();
-			seq.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
-			
+			seq.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
+			seq.AppendToStringBuilderAsLine(reset(),"\t").Is(expected);
 			
 		}
+
+		[Fact]
+		public void ExtractTest()
+		{
+			var bld = new StringBuilder();
+			StringBuilder reset() => bld.Clear().Append("0123456789");
+
+			reset().Extract(1..).Is("123456789");
+			reset().Extract(..^1).Is("012345678");
+
+			reset().Extract(..).Is("0123456789");
+			reset().Extract(^3..).Is("789");
+
+			reset().Extract(1..^1).Is("12345678");
+			reset().Extract(..^10).Is("");
+
+			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(-1..));
+			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(..-1));
+			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(..^11));
+			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(1..^10));
+			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(11..));
+
+
+
+		}
+
 
 
 	}
