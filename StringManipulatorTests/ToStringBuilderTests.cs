@@ -9,7 +9,7 @@ namespace Tokeiya3.StringManipulatorTests
 {
 	public class ToStringBuilderTests
 	{
-		private const string ExpectedString = "When seek the lazyness then arrive diligence";
+		private const string ExpectedString = "When seek the lazyness then arrive at diligence";
 
 		private const string PreInputed =
 			"Machines would never tumbe fall to evil, if human being didn't make mistakes.";
