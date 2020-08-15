@@ -84,87 +84,87 @@ namespace Tokeiya3.StringManipulatorTests
 		[Fact]
 		public void JoinedAppendTest()
 		{
-			var expected = PreInputed + ExpectedString.Replace(' ', '\t');
-			var bld = PreInputed.ToStringBuilder();
+			var expected = PreInputted + ExpectedString.Replace(' ', '\t');
+			var bld = PreInputted.ToStringBuilder();
 
-			StringBuilder reset() => bld.Clear().Append(PreInputed);
+			StringBuilder reset() => bld.Clear().Append(PreInputted);
 
 
 			var array = ExpectedString.Split(' ');
 			array.AppendToStringBuilder(reset(),'\t').Is(expected);
-			array.AppendToStringBuilder(reset(),"hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge"));
+			array.AppendToStringBuilder(reset(),"hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge"));
 
-			Array.Empty<string>().AppendToStringBuilder(reset(),'\t').Is(PreInputed);
-			Array.Empty<string>().AppendToStringBuilder(reset(),"hoge").Is(PreInputed);
+			Array.Empty<string>().AppendToStringBuilder(reset(),'\t').Is(PreInputted);
+			Array.Empty<string>().AppendToStringBuilder(reset(),"hoge").Is(PreInputted);
 
 
 			array.Select(s => s).AppendToStringBuilder(reset(), '\t').Is(expected);
-			array.Select(s=>s).AppendToStringBuilder(reset(),"hoge").Is(PreInputed+ExpectedString.Replace(" ","hoge"));
+			array.Select(s=>s).AppendToStringBuilder(reset(),"hoge").Is(PreInputted+ExpectedString.Replace(" ","hoge"));
 
-			Enumerable.Empty<string>().AppendToStringBuilder(reset(),'\t').Is(PreInputed);
-			Enumerable.Empty<string>().AppendToStringBuilder(reset(),"hoge").Is(PreInputed);
+			Enumerable.Empty<string>().AppendToStringBuilder(reset(),'\t').Is(PreInputted);
+			Enumerable.Empty<string>().AppendToStringBuilder(reset(),"hoge").Is(PreInputted);
 
 			new ReadOnlySpan<string>(array).AppendToStringBuilder(reset(),'\t').Is(expected);
-			new ReadOnlySpan<string>(array).AppendToStringBuilder(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge")); ;
+			new ReadOnlySpan<string>(array).AppendToStringBuilder(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge")); ;
 
-			new ReadOnlySpan<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),'\t').Is(PreInputed);
-			new ReadOnlySpan<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),"hoge").Is(PreInputed);
+			new ReadOnlySpan<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),'\t').Is(PreInputted);
+			new ReadOnlySpan<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),"hoge").Is(PreInputted);
 
 			new ReadOnlyMemory<string>(array).AppendToStringBuilder(reset(), '\t').Is(expected);
-			new ReadOnlyMemory<string>(array).AppendToStringBuilder(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge")); ;
+			new ReadOnlyMemory<string>(array).AppendToStringBuilder(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge")); ;
 
-			new ReadOnlyMemory<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),'\t').Is(PreInputed);
-			new ReadOnlyMemory<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),"hoge").Is(PreInputed);
+			new ReadOnlyMemory<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),'\t').Is(PreInputted);
+			new ReadOnlyMemory<string>(Array.Empty<string>()).AppendToStringBuilder(reset(),"hoge").Is(PreInputted);
 
 			var seq = array.Select(s => s.ToCharArray().Select(c => c));
 			seq.AppendToStringBuilder(reset(), '\t').Is(expected);
-			seq.AppendToStringBuilder(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge")); ;
+			seq.AppendToStringBuilder(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge")); ;
 
 			seq = Enumerable.Empty<string>();
-			seq.AppendToStringBuilder(reset(),'\t').Is(PreInputed);
-			seq.AppendToStringBuilder(reset(),"hoge").Is(PreInputed);
+			seq.AppendToStringBuilder(reset(),'\t').Is(PreInputted);
+			seq.AppendToStringBuilder(reset(),"hoge").Is(PreInputted);
 
 		}
 
 		[Fact]
 		public void AppendToStringBuilderAsLineTest()
 		{
-			var bld = PreInputed.ToStringBuilder();
-			StringBuilder reset() => bld.Clear().Append(PreInputed);
+			var bld = PreInputted.ToStringBuilder();
+			StringBuilder reset() => bld.Clear().Append(PreInputted);
 
 			var array = ExpectedString.Split(' ');
-			var expected = PreInputed + ExpectedString.Replace(' ', '\t') + Environment.NewLine;
+			var expected = PreInputted + ExpectedString.Replace(' ', '\t') + Environment.NewLine;
 
 			array.AppendToStringBuilderAsLine(reset(), '\t').Is(expected);
-			array.AppendToStringBuilder(reset(),"hoge").Is(PreInputed+ExpectedString.Replace(" ","hoge"));
+			array.AppendToStringBuilder(reset(),"hoge").Is(PreInputted+ExpectedString.Replace(" ","hoge"));
 			
-			Array.Empty<string>().AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputed+Environment.NewLine);
-			Array.Empty<string>().AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputed+Environment.NewLine);
+			Array.Empty<string>().AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputted+Environment.NewLine);
+			Array.Empty<string>().AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputted+Environment.NewLine);
 
 			var span=new ReadOnlySpan<string>(array);
 			span.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
-			span.AppendToStringBuilderAsLine(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge"));
+			span.AppendToStringBuilderAsLine(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge"));
 
 			span=new ReadOnlySpan<string>(Array.Empty<string>());
-			span.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputed+Environment.NewLine);
-			span.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputed+Environment.NewLine);
+			span.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputted+Environment.NewLine);
+			span.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputted+Environment.NewLine);
 
 			
 			var mem=new ReadOnlyMemory<string>(array);
 			mem.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
-			mem.AppendToStringBuilder(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge"));
+			mem.AppendToStringBuilder(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge"));
 
 			mem=new ReadOnlyMemory<string>(Array.Empty<string>());
-			mem.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputed+Environment.NewLine);
-			mem.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputed+Environment.NewLine);
+			mem.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputted+Environment.NewLine);
+			mem.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputted+Environment.NewLine);
 
 			var seq = array.Select(s => s.ToCharArray().Select(c => c));
 			seq.AppendToStringBuilderAsLine(reset(),'\t').Is(expected);
-			seq.AppendToStringBuilder(reset(), "hoge").Is(PreInputed + ExpectedString.Replace(" ", "hoge"));
+			seq.AppendToStringBuilder(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge"));
 
 			seq = Enumerable.Empty<string>();
-			seq.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputed+Environment.NewLine);
-			seq.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputed+Environment.NewLine);
+			seq.AppendToStringBuilderAsLine(reset(),'\t').Is(PreInputted+Environment.NewLine);
+			seq.AppendToStringBuilderAsLine(reset(),"hoge").Is(PreInputted+Environment.NewLine);
 
 		}
 
