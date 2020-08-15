@@ -106,7 +106,40 @@ namespace Tokeiya3.StringManipulatorTests
 		[Fact]
 		public void AppendToStringBuilderAsLineTest()
 		{
+			var bld = PreInputed.ToStringBuilder();
+			StringBuilder reset() => bld.Clear().Append(PreInputed);
 
+			var array = ExpectedString.Split(' ');
+			var expected = PreInputed + ExpectedString.Replace(' ', '\t') + Environment.NewLine;
+			
+			array.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+			
+			reset();
+			array.AppendToStringBuilder(bld,"\t").Is(expected);
+
+			reset();
+			var span=new ReadOnlySpan<string>(array);
+			span.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+
+			reset();
+			span.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
+
+			reset();
+			var mem=new ReadOnlyMemory<string>(array);
+			mem.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+
+			reset();
+			mem.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
+
+			var seq = array.Select(s => s.ToCharArray().Select(c => c));
+			
+			reset();
+			seq.AppendToStringBuilderAsLine(bld,'\t').Is(expected);
+
+			reset();
+			seq.AppendToStringBuilderAsLine(bld,"\t").Is(expected);
+			
+			
 		}
 
 
