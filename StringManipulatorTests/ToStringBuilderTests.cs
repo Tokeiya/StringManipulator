@@ -15,7 +15,7 @@ namespace Tokeiya3.StringManipulatorTests
 			"Machines would never tumbe fall to evil, if human being didn't make mistakes.";
 
 
-		[Fact()]
+		[Fact]
 		public void ScalarToStringBuilderTest()
 		{
 			ExpectedString.ToStringBuilder().Is(ExpectedString);
@@ -63,26 +63,6 @@ namespace Tokeiya3.StringManipulatorTests
 		}
 
 		[Fact]
-		public void ScalarAppendTest()
-		{
-			const string expected = PreInputed + ExpectedString;
-
-			var bld = PreInputed.ToStringBuilder();
-			ExpectedString.Append(bld).Is(expected);
-
-			bld = PreInputed.ToStringBuilder();
-			ExpectedString.Select(c => c).Append(bld).Is(expected);
-
-			bld = PreInputed.ToStringBuilder();
-			new ReadOnlySpan<char>(ExpectedString.ToCharArray()).Append(bld).Is(expected);
-
-			bld = PreInputed.ToStringBuilder();
-			new ReadOnlyMemory<char>(ExpectedString.ToCharArray()).Append(bld).Is(expected);
-
-
-		}
-
-		[Fact]
 		public void JoinedAppendTest()
 		{
 			var expected = PreInputed + ExpectedString.Replace(' ', '\t');
@@ -92,20 +72,40 @@ namespace Tokeiya3.StringManipulatorTests
 
 
 			var array = ExpectedString.Split(' ');
-			array.Append(bld,'\t').Is(expected);
+			array.AppendToStringBuilder(bld,'\t').Is(expected);
 			reset();
 			array.Append("\t").Is(expected);
 
 
 			reset();
-			array.Select(s => s).Append(bld, '\t').Is(expected);
+			array.Select(s => s).AppendToStringBuilder(bld, '\t').Is(expected);
 			reset();
-			array.Select(s=>s).Append(bld,"\t").Is(expected);
+			array.Select(s=>s).AppendToStringBuilder(bld,"\t").Is(expected);
 
 			reset();
-			new ReadOnlySpan<string>(array).Append(bld,'\t').Is(expected);
+			new ReadOnlySpan<string>(array).AppendToStringBuilder(bld,'\t').Is(expected);
 
+			reset();
+			new ReadOnlySpan<string>(array).AppendToStringBuilder(bld, "\t").Is(expected);
 
+			reset();
+			new ReadOnlyMemory<string>(array).AppendToStringBuilder(bld, '\t').Is(expected);
+
+			reset();
+			new ReadOnlyMemory<string>(array).AppendToStringBuilder(bld, "\t").Is(expected);
+
+			var seq = array.Select(s => s.ToCharArray().Select(c => c));
+
+			reset();
+			seq.AppendToStringBuilder(bld, '\t').Is(expected);
+
+			reset();
+			seq.AppendToStringBuilder(bld, "\t").Is(expected);
+		}
+
+		[Fact]
+		public void AppendToStringBuilderAsLineTest()
+		{
 
 		}
 
