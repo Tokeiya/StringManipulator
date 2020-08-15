@@ -182,6 +182,7 @@ namespace Tokeiya3.StringManipulatorTests
 
 			reset().Extract(1..^1).Is("12345678");
 			reset().Extract(..^10).Is("");
+			reset().Extract(10..).Is("");
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(-1..));
 			Assert.Throws<ArgumentOutOfRangeException>(() => reset().Extract(..-1));
