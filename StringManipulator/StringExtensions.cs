@@ -335,8 +335,11 @@ namespace Tokeiya3.StringManipulator
 		public static StringBuilder AppendToStringBuilder(this IEnumerable<IEnumerable<char>> source,
 			StringBuilder stringBuilder, char separator)
 		{
+
+			// ReSharper disable once PossibleMultipleEnumeration
 			if (!source.Any()) return stringBuilder;
 
+			// ReSharper disable once PossibleMultipleEnumeration
 			foreach (var elem in source)
 			{
 				foreach (var c in elem) stringBuilder.Append(c);
@@ -360,8 +363,10 @@ namespace Tokeiya3.StringManipulator
 		public static StringBuilder AppendToStringBuilder(this IEnumerable<IEnumerable<char>> source,
 			StringBuilder stringBuilder, string separator)
 		{
+			// ReSharper disable once PossibleMultipleEnumeration
 			if (!source.Any()) return stringBuilder;
 
+			// ReSharper disable once PossibleMultipleEnumeration
 			foreach (var elem in source)
 			{
 				foreach (var c in elem) stringBuilder.Append(c);
