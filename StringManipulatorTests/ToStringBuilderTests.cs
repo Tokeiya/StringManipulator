@@ -150,7 +150,7 @@ namespace Tokeiya3.StringManipulatorTests
 
 			var span = new ReadOnlySpan<string>(array);
 			span.AppendToStringBuilderAsLine(reset(), '\t').Is(expected);
-			span.AppendToStringBuilderAsLine(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge"));
+			span.AppendToStringBuilderAsLine(reset(), "hoge").Is(PreInputted + ExpectedString.Replace(" ", "hoge")+Environment.NewLine);
 
 			span = new ReadOnlySpan<string>(Array.Empty<string>());
 			span.AppendToStringBuilderAsLine(reset(), '\t').Is(PreInputted + Environment.NewLine);
