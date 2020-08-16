@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using Tokeiya3.StringManipulator;
 using Xunit;
 
@@ -19,6 +20,8 @@ namespace Tokeiya3.StringManipulatorTests
 		{
 			ExpectedString.ToStringBuilder().Is(ExpectedString);
 
+			ExpectedString.Select(c=>c).ToStringBuilder().Is(ExpectedString);
+
 			ReadOnlySpan<char> span = ExpectedString;
 			span.ToStringBuilder().Is(ExpectedString);
 
@@ -32,6 +35,20 @@ namespace Tokeiya3.StringManipulatorTests
 
 			mem = new ReadOnlyMemory<char>(Array.Empty<char>());
 			mem.ToStringBuilder().Is("");
+
+			{
+				var ary = Enumerable.Range(0, 10).Select(i => (object) i).ToArray();
+
+				ary.ToStringBuilder('\t').Is(string.Join('\t', ary));
+				ary.ToStringBuilder("hoge").Is(string.Join("hoge", ary));
+			}
+
+			{
+				var ary = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
+
+				ary.ToStringBuilder('\t').Is(string.Join('\t',ary));
+				ary.ToStringBuilder("hoge").Is(string.Join("hoge",ary));
+			}
 		}
 
 		[Fact]
@@ -127,9 +144,21 @@ namespace Tokeiya3.StringManipulatorTests
 			seq = Enumerable.Empty<string>();
 			seq.AppendToStringBuilder(reset(), '\t').Is(PreInputted);
 			seq.AppendToStringBuilder(reset(), "hoge").Is(PreInputted);
+
+
+			var strAry = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
+			strAry.AppendToStringBuilder(reset(), '\t').Is(PreInputted + string.Join('\t', strAry));
+			strAry.AppendToStringBuilder(reset(), "hoge").Is(PreInputted + string.Join("hoge", strAry));
+
+			object[] objAry = strAry;
+
+			objAry.AppendToStringBuilder(reset(), '\t').Is(PreInputted + string.Join('\t', objAry));
+			objAry.AppendToStringBuilder(reset(), "hoge").Is(PreInputted + string.Join("hoge", objAry));
+
 		}
 
-		[Fact]
+
+			[Fact]
 		public void AppendToStringBuilderAsLineTest()
 		{
 			var bld = PreInputted.ToStringBuilder();
@@ -172,6 +201,28 @@ namespace Tokeiya3.StringManipulatorTests
 			seq = Enumerable.Empty<string>();
 			seq.AppendToStringBuilderAsLine(reset(), '\t').Is(PreInputted + Environment.NewLine);
 			seq.AppendToStringBuilderAsLine(reset(), "hoge").Is(PreInputted + Environment.NewLine);
+
+			var strArray = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
+			strArray.AppendToStringBuilderAsLine(reset(),'\t')
+				.Is(PreInputted+string.Join('\t',strArray)+Environment.NewLine);
+
+			strArray.AppendToStringBuilderAsLine(reset(),"hoge")
+				.Is(PreInputted+string.Join("hoge",strArray)+Environment.NewLine);
+
+			object[] objArray = strArray;
+			objArray.AppendToStringBuilderAsLine(reset(), '\t')
+				.Is(PreInputted + string.Join('\t', objArray) + Environment.NewLine);
+
+			objArray.AppendToStringBuilderAsLine(reset(), "hoge")
+				.Is(PreInputted + string.Join("hoge", objArray) + Environment.NewLine);
+
+			var intSeq = Enumerable.Range(0, 10);
+			intSeq.AppendToStringBuilderAsLine(reset(),'\t')
+				.Is(PreInputted+string.Join('\t',intSeq)+Environment.NewLine);
+
+			intSeq.AppendToStringBuilderAsLine(reset(),"hoge")
+				.Is(PreInputted+string.Join("hoge",intSeq)+Environment.NewLine);
+
 		}
 
 		[Fact]
