@@ -4,6 +4,16 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Tokeiya3.StringManipulator</RootNamespace>
 	  <nullable>enable</nullable>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	  <PackageLicenseExpression>BSD-3-Clause-Clear</PackageLicenseExpression>
+	  <PackageProjectUrl>https://github.com/Tokeiya/StringManipulator</PackageProjectUrl>
+	  <Description>Simple and useful string manipulating helper.</Description>
+	  <RepositoryUrl>https://github.com/Tokeiya/StringManipulator.git</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>string,StringBuilder</PackageTags>
+	  <Version>0.1.0</Version>
+	  <Copyright>Tokeiya3</Copyright>
   </PropertyGroup>
 
 </Project>

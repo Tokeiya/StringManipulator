@@ -1,2 +1,2 @@
 # StringManipulator
-String manipulation library
+Simple and useful string manipulating helper.
