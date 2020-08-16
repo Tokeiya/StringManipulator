@@ -12,7 +12,7 @@
 	  <RepositoryUrl>https://github.com/Tokeiya/StringManipulator.git</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <PackageTags>string,StringBuilder</PackageTags>
-	  <Version>0.1.0</Version>
+	  <Version>0.1.1.0</Version>
 	  <Copyright>Tokeiya3</Copyright>
   </PropertyGroup>
 

@@ -573,14 +573,10 @@ namespace Tokeiya3.StringManipulator
 			var start = calculate(range.Start, stringBuilder.Length);
 			if (start > stringBuilder.Length) throw new ArgumentOutOfRangeException(nameof(range));
 
-			var end = calculate(range.End, stringBuilder.Length);
+			var end = calculate(range.End, stringBuilder.Length)-start;
 			if (end > stringBuilder.Length) throw new ArgumentOutOfRangeException(nameof(range));
 
-			if (end - start > stringBuilder.Length) throw new ArgumentOutOfRangeException(nameof(range));
-
 			stringBuilder.Remove(0, (int) start);
-
-			end -= start;
 			stringBuilder.Remove((int) end, (int) (stringBuilder.Length - end));
 
 			return stringBuilder;
