@@ -7,7 +7,7 @@ namespace Tokeiya3.StringManipulator
 	public static class StringBuiderExtensions
 	{
 		/// <summary>
-		/// Create a StringBuilder from a string.
+		///     Create a StringBuilder from a string.
 		/// </summary>
 		/// <param name="source">A string to create a StringBuilder from.</param>
 		/// <returns>A StringBuilder created from the specified source.</returns>
@@ -15,7 +15,7 @@ namespace Tokeiya3.StringManipulator
 
 
 		/// <summary>
-		/// Create a StringBuilder from an IEnumerable
+		///     Create a StringBuilder from an IEnumerable
 		/// </summary>
 		/// <param name="source">An IEnumerable to create a StringBuilder from.</param>
 		/// <returns>A StringBuilder that contain the elements from the input sequence.</returns>
@@ -23,7 +23,7 @@ namespace Tokeiya3.StringManipulator
 			new StringBuilder().Append(source);
 
 		/// <summary>
-		/// Create a StringBuilder from an ReadOnlySpan
+		///     Create a StringBuilder from an ReadOnlySpan
 		/// </summary>
 		/// <param name="source">A ReadOnlySpan to create a StringBuilder from.</param>
 		/// <returns>A StringBuilder that contain the elements from the input ReadOnlySpan.</returns>
@@ -32,7 +32,7 @@ namespace Tokeiya3.StringManipulator
 
 
 		/// <summary>
-		/// Create a StringBuilder from a ReadOnlyMemory.
+		///     Create a StringBuilder from a ReadOnlyMemory.
 		/// </summary>
 		/// <param name="source">A ReadOnlyMemory to create a StringBuilder from.</param>
 		/// <returns>A StringBuilder that contain the elements from the input ReadOnlyMemory.</returns>
@@ -41,103 +41,85 @@ namespace Tokeiya3.StringManipulator
 
 
 		/// <summary>
-		/// Concatenates the string of the provided ReadonlyMemory, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided ReadonlyMemory,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An ReadonlyMemory that contains the string.</param>
 		/// <param name="separator">Specify the separator.</param>
 		/// <returns>A StringBuider that contain the concatenated the specified strings with specified separator.</returns>
-		public static StringBuilder ToStringBuilder(this ReadOnlyMemory<string> source, char separator)
-		{
-			var ret = new StringBuilder();
-
-			foreach (var elem in source.Span)
-			{
-				ret.Append(elem).Append(separator);
-			}
-
-			return ret.Extract(..^1);
-		}
-
+		public static StringBuilder ToStringBuilder(this ReadOnlyMemory<string> source, char separator) =>
+			source.AppendToStringBuilder(new StringBuilder(), separator);
 
 		/// <summary>
-		/// Concatenates the string of the provided ReadonlyMemory, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided ReadonlyMemory,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An ReadonlyMemory that contains the string.</param>
 		/// <param name="separator">Specify the separator.</param>
 		/// <returns>A StringBuider that contain the concatenated the specified strings with specified separator.</returns>
-
 		public static StringBuilder ToStringBuilder(this ReadOnlyMemory<string> source, string separator) =>
-			new StringBuilder().AppendJoin(separator, source);
-
+			source.AppendToStringBuilder(new StringBuilder(), separator);
 
 		/// <summary>
-		/// Concatenates the string of the provided ReadOnlySpan, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided ReadOnlySpan,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An ReadonlySpan that contains the string.</param>
 		/// <param name="separator">Specify the separator.</param>
 		/// <returns>A StringBuider that contain the concatenated the specified strings with specified separator.</returns>
-
-		public static StringBuilder ToStringBuilder(this ReadOnlySpan<string> source, char separator)
-		{
-			var ret = new StringBuilder();
-
-			foreach (var s in source)
-			{
-				ret.Append(s).Append(separator);
-			}
-
-			return ret.Extract(..^1);
-		}
+		public static StringBuilder ToStringBuilder(this ReadOnlySpan<string> source, char separator) =>
+			source.AppendToStringBuilder(new StringBuilder(), separator);
 
 
 		/// <summary>
-		/// Concatenates the string of the provided ReadonlySpan, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided ReadonlySpan,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An ReadonlyMemory that contains the string.</param>
 		/// <param name="separator">Specify the separator.</param>
 		/// <returns>A StringBuider that contain the concatenated the specified strings with specified separator.</returns>
-
-		public static StringBuilder ToStringBuilder(this ReadOnlySpan<string> source, string separator)
-		{
-			var ret = new StringBuilder();
-
-			foreach (var elem in separator)
-			{
-				ret.Append(elem).Append(separator);
-			}
-
-			return ret.Extract(..^1);
-		}
+		public static StringBuilder ToStringBuilder(this ReadOnlySpan<string> source, string separator) =>
+			source.AppendToStringBuilder(new StringBuilder(), separator);
 
 
 		/// <summary>
-		/// Concatenates the string of the provided Sequence, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided Sequence,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An object sequence for concatenates.</param>
 		/// <param name="separator">Specify the separator.</param>
-		/// <returns>A StringBuider that contain the concatenated the specified object's string expression with specified separator.</returns>
+		/// <returns>
+		///     A StringBuider that contain the concatenated the specified object's string expression with specified
+		///     separator.
+		/// </returns>
 		public static StringBuilder ToStringBuilder<T>(this IEnumerable<T> source, char separator) =>
 			new StringBuilder().AppendJoin(separator, source);
 
 		/// <summary>
-		/// Concatenates the string of the provided Sequence, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided Sequence,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">An object sequence for concatenates.</param>
 		/// <param name="separator">Specify the separator.</param>
-		/// <returns>A StringBuider that contain the concatenated the specified object's string expression with specified separator.</returns>
+		/// <returns>
+		///     A StringBuider that contain the concatenated the specified object's string expression with specified
+		///     separator.
+		/// </returns>
 		public static StringBuilder ToStringBuilder<T>(this IEnumerable<T> source, string separator) =>
 			new StringBuilder().AppendJoin(separator, source);
 
 
 		/// <summary>
-		/// Concatenates the string of the provided squence of the char sequence, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided sequence of the char sequence,
+		///     using the specified separator between each
+		///     string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">A sequence of the character sequence for concatenates.</param>
 		/// <param name="separator">Specify the separator.</param>
@@ -148,10 +130,7 @@ namespace Tokeiya3.StringManipulator
 
 			foreach (var elem in source)
 			{
-				foreach (var c in elem)
-				{
-					ret.Append(c);
-				}
+				foreach (var c in elem) ret.Append(c);
 
 				ret.Append(separator);
 			}
@@ -160,8 +139,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided squence of the char sequence, using the specified separator between each string.
-		/// Then create the StringBuilder from it.
+		///     Concatenates the string of the provided sequence of the char sequence,
+		///     using the specified separator between each string.
+		///     Then create the StringBuilder from it.
 		/// </summary>
 		/// <param name="source">A sequence of the character sequence for concatenates.</param>
 		/// <param name="separator">Specify the separator.</param>
@@ -172,10 +152,7 @@ namespace Tokeiya3.StringManipulator
 
 			foreach (var elem in source)
 			{
-				foreach (var c in elem)
-				{
-					ret.Append(c);
-				}
+				foreach (var c in elem) ret.Append(c);
 
 				ret.Append(separator);
 			}
@@ -184,8 +161,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string sequence, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string sequence,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -195,8 +173,9 @@ namespace Tokeiya3.StringManipulator
 			char separator) => stringBuilder.AppendJoin(separator, source);
 
 		/// <summary>
-		/// Concatenates the string of the provided string sequence, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string sequence,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -206,8 +185,9 @@ namespace Tokeiya3.StringManipulator
 			string separator) => stringBuilder.AppendJoin(separator, source);
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlySpan, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlySpan,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlySpan for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -222,8 +202,9 @@ namespace Tokeiya3.StringManipulator
 
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlySpan, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlySpan,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlySpan for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -234,13 +215,13 @@ namespace Tokeiya3.StringManipulator
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
-
 		}
 
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlyMemory, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlyMemory,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlyMemory for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -254,8 +235,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlyMemory, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlyMemory,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlyMemory for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -269,15 +251,16 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided a sequence of character sequences, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided a sequence of character sequences,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A sequence of character sequences</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
 		/// <param name="separator">Specify the separator.</param>
-		/// <returns>A reference to the designated instance after the append operation has completed.</returns>		
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
 		public static StringBuilder AppendToStringBuilder(this IEnumerable<IEnumerable<char>> source,
-		StringBuilder stringBuilder, char separator)
+			StringBuilder stringBuilder, char separator)
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
@@ -285,13 +268,14 @@ namespace Tokeiya3.StringManipulator
 
 
 		/// <summary>
-		/// Concatenates the string of the provided a sequence of character sequences, using the specified separator between each string.
-		/// Then appends the result to the designated instance of the StringBuilder.
+		///     Concatenates the string of the provided a sequence of character sequences,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
 		/// </summary>
 		/// <param name="source">A sequence of character sequences</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
 		/// <param name="separator">Specify the separator.</param>
-		/// <returns>A reference to the designated instance after the append operation has completed.</returns>		
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
 		public static StringBuilder AppendToStringBuilder(this IEnumerable<IEnumerable<char>> source,
 			StringBuilder stringBuilder, string separator)
 		{
@@ -299,9 +283,45 @@ namespace Tokeiya3.StringManipulator
 			throw new NotImplementedException("Append is not implemented");
 		}
 
+
 		/// <summary>
-		/// Concatenates the string of the provided string sequence, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string representation of an specified objects,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
+		/// </summary>
+		/// <typeparam name="T">A object type.</typeparam>
+		/// <param name="source">A sequence of object</param>
+		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
+		/// <param name="separator">Specify the separator.</param>
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
+		public static StringBuilder AppendToStringBuilder<T>(this IEnumerable<T> source, StringBuilder stringBuilder,
+			char separator)
+		{
+#warning AppendToStringBuilder_Is_NotImpl
+			throw new NotImplementedException("AppendToStringBuilder is not implemented");
+		}
+
+		/// <summary>
+		///     Concatenates the string representation of an specified objects,
+		///     using the specified separator between each string.
+		///     Then appends the result to the designated instance of the StringBuilder.
+		/// </summary>
+		/// <typeparam name="T">A object type.</typeparam>
+		/// <param name="source">A sequence of object</param>
+		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
+		/// <param name="separator">Specify the separator.</param>
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
+		public static StringBuilder AppendToStringBuilder<T>(this IEnumerable<T> source, StringBuilder stringBuilder,
+			string separator)
+		{
+#warning AppendToStringBuilder_Is_NotImpl
+			throw new NotImplementedException("AppendToStringBuilder is not implemented");
+		}
+
+
+		/// <summary>
+		///     Concatenates the string of the provided string sequence, using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -315,8 +335,8 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string sequence, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided string sequence, using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -330,8 +350,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlySpan, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlySpan,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlySpan for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -345,8 +366,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlySpan, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlySpan,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlySpan for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -357,12 +379,12 @@ namespace Tokeiya3.StringManipulator
 		{
 #warning Append_Is_NotImpl
 			throw new NotImplementedException("Append is not implemented");
-
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlyMemory, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlyMemory,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlyMemory for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -376,8 +398,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided string ReadOnlyMemory, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided string ReadOnlyMemory,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string ReadOnlyMemory for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -391,8 +414,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided character sequence, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided character sequence,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string character sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -406,8 +430,9 @@ namespace Tokeiya3.StringManipulator
 		}
 
 		/// <summary>
-		/// Concatenates the string of the provided character sequence, using the specified separator between each string.
-		/// Then appends the result  and default line terminator to the specified StringBuilder.
+		///     Concatenates the string of the provided character sequence,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
 		/// </summary>
 		/// <param name="source">A string character sequence for concatenates.</param>
 		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
@@ -420,8 +445,44 @@ namespace Tokeiya3.StringManipulator
 			throw new NotImplementedException("Append is not implemented");
 		}
 
+
 		/// <summary>
-		/// Extracts the StringBuilder according to the specified range.
+		///     Concatenates the string representation of an specified objects,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
+		/// </summary>
+		/// <typeparam name="T">A object type.</typeparam>
+		/// <param name="source">A sequence of object</param>
+		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
+		/// <param name="separator">Specify the separator.</param>
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
+		public static StringBuilder AppendToStringBuilderAsLine<T>(this IEnumerable<T> source,
+			StringBuilder stringBuilder, char separator)
+		{
+#warning AppendToStringBuilderAsLine_Is_NotImpl
+			throw new NotImplementedException("AppendToStringBuilderAsLine is not implemented");
+		}
+
+		/// <summary>
+		///     Concatenates the string representation of an specified objects,
+		///     using the specified separator between each string.
+		///     Then appends the result and finally default line terminator to the designated StringBuilder.
+		/// </summary>
+		/// <typeparam name="T">A object type.</typeparam>
+		/// <param name="source">A sequence of object</param>
+		/// <param name="stringBuilder">A StringBuilder to be appended.</param>
+		/// <param name="separator">Specify the separator.</param>
+		/// <returns>A reference to the designated instance after the append operation has completed.</returns>
+		public static StringBuilder AppendToStringBuilderAsLine<T>(this IEnumerable<T> source,
+			StringBuilder stringBuilder, string separator)
+		{
+#warning AppendToStringBuilderAsLine_Is_NotImpl
+			throw new NotImplementedException("AppendToStringBuilderAsLine is not implemented");
+		}
+
+
+		/// <summary>
+		///     Extracts the StringBuilder according to the specified range.
 		/// </summary>
 		/// <param name="stringBuilder">A StringBuilder that extract the contents.</param>
 		/// <param name="range">Specify the extract range.</param>
@@ -445,10 +506,6 @@ namespace Tokeiya3.StringManipulator
 			stringBuilder.Remove((int) end, (int) (stringBuilder.Length - end));
 
 			return stringBuilder;
-
-
-
 		}
-
 	}
 }

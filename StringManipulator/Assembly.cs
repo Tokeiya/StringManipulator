@@ -1,4 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("StringManipulatorTests")]
-
+[assembly: InternalsVisibleTo("StringManipulatorTests")]
