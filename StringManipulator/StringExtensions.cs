@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tokeiya3.StringManipulator
 {
-	public static class StringBuiderExtensions
+	public static class StringBuilderExtensions
 	{
 		/// <summary>
 		///     Create a StringBuilder from a string.
@@ -564,7 +564,7 @@ namespace Tokeiya3.StringManipulator
 		/// </summary>
 		/// <param name="stringBuilder">A StringBuilder that extract the contents.</param>
 		/// <param name="range">Specify the extract range.</param>
-		/// <returns>A reference to the StringBuider instance after the extracted operation has completed.</returns>
+		/// <returns>A reference to the StringBuilder instance after the extracted operation has completed.</returns>
 		public static StringBuilder Extract(this StringBuilder stringBuilder, Range range)
 		{
 			static uint calculate(Index idx, int length) =>
@@ -580,7 +580,7 @@ namespace Tokeiya3.StringManipulator
 
 			stringBuilder.Remove(0, (int) start);
 
-			end = calculate(range.End, stringBuilder.Length);
+			end -= start;
 			stringBuilder.Remove((int) end, (int) (stringBuilder.Length - end));
 
 			return stringBuilder;
