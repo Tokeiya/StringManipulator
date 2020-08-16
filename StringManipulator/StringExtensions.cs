@@ -420,6 +420,12 @@ namespace Tokeiya3.StringManipulator
 			throw new NotImplementedException("Append is not implemented");
 		}
 
+		/// <summary>
+		/// Extracts the StringBuilder according to the specified range.
+		/// </summary>
+		/// <param name="stringBuilder">A StringBuilder that extract the contents.</param>
+		/// <param name="range">Specify the extract range.</param>
+		/// <returns>A reference to the StringBuider instance after the extracted operation has completed.</returns>
 		public static StringBuilder Extract(this StringBuilder stringBuilder, Range range)
 		{
 			static uint calculate(Index idx, int length) =>
