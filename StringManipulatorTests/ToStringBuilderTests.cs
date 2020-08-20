@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using Tokeiya3.StringManipulator;
 using Xunit;
 
@@ -57,22 +56,22 @@ namespace Tokeiya3.StringManipulatorTests
 		{
 			var source = ExpectedString.Split(' ');
 			var actual = source.ToStringBuilder('\t');
-			actual.Is(ExpectedString," ","\t");
+			actual.Is(ExpectedString, " ", "\t");
 
 			actual = source.ToStringBuilder("ばらし");
-			actual.Is(ExpectedString," ","ばらし");
+			actual.Is(ExpectedString, " ", "ばらし");
 		}
 
 
 		[Fact]
 		public void ObjectArrayTest()
 		{
-			var source = new object[] {'a', "テキスト", 42};
+			var source = new object[] { 'a', "テキスト", 42 };
 			var actual = source.ToStringBuilder('\t');
-			actual.Is(string.Join('\t',source));
+			actual.Is(string.Join('\t', source));
 
 			actual = source.ToStringBuilder("ばらし");
-			actual.Is(string.Join("ばらし",source));
+			actual.Is(string.Join("ばらし", source));
 		}
 
 		[Fact]
@@ -81,10 +80,10 @@ namespace Tokeiya3.StringManipulatorTests
 			ReadOnlyMemory<string> source = ExpectedString.Split(' ');
 
 			var actual = source.ToStringBuilder('\t');
-			actual.Is(ExpectedString," ","\t");
+			actual.Is(ExpectedString, " ", "\t");
 
 			actual = source.ToStringBuilder("ばらし");
-			actual.Is(ExpectedString," ","ばらし");
+			actual.Is(ExpectedString, " ", "ばらし");
 		}
 
 		[Fact]
@@ -93,10 +92,10 @@ namespace Tokeiya3.StringManipulatorTests
 			ReadOnlySpan<string> source = ExpectedString.Split(' ');
 
 			var actual = source.ToStringBuilder('\t');
-			actual.Is(ExpectedString," ","\t");
+			actual.Is(ExpectedString, " ", "\t");
 
 			actual = source.ToStringBuilder("ばらし");
-			actual.Is(ExpectedString," ","ばらし");
+			actual.Is(ExpectedString, " ", "ばらし");
 		}
 
 		[Fact]
@@ -107,7 +106,7 @@ namespace Tokeiya3.StringManipulatorTests
 			var source = Enumerable.Range(0, 42);
 			var actual = source.ToStringBuilder('\t');
 
-			actual.Is(string.Join('\t',source));
+			actual.Is(string.Join('\t', source));
 
 			actual = source.ToStringBuilder("ばらし");
 			actual.Is(string.Join("ばらし", source));
@@ -126,7 +125,7 @@ namespace Tokeiya3.StringManipulatorTests
 			actual.Is(ExpectedString, " ", "\t");
 
 			actual = source.ToStringBuilder("ばらし");
-			actual.Is(ExpectedString," ","ばらし");
+			actual.Is(ExpectedString, " ", "ばらし");
 
 			// ReSharper restore PossibleMultipleEnumeration
 

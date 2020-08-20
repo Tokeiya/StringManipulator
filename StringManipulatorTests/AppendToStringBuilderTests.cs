@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tokeiya3.StringManipulatorTests
 {
-	public class StringBuilderAppendToStringTests
+	public class AppendToStringBuilderTests
 	{
 
 		private const string ExpectedString = "When seek the lazyness then arrive at diligence";
