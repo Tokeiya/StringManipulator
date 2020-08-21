@@ -77,6 +77,8 @@ namespace Tokeiya3.StringManipulatorTests
 
 
 
+
+
 		[Fact]
 		public void JoinedAppendTest()
 		{
