@@ -14,6 +14,9 @@ namespace Tokeiya3.StringManipulatorTests
 		private const string PreInputted =
 			"Machines would never tumbe fall to evil, if human being didn't make mistakes.";
 
+		private const char CharSeparator = '\t';
+		private const string StringSeparator = "ばらし";
+
 
 		[Fact]
 		public void StringArrayTest()
@@ -21,20 +24,63 @@ namespace Tokeiya3.StringManipulatorTests
 			var sample = ExpectedString.Split(' ');
 			var actual = PreInputted.ToStringBuilder();
 
-			sample.AppendToStringBuilder(actual, '\t');
-			actual.Is(PreInputted, ExpectedString, " ", "\t");
+			sample.AppendToStringBuilder(actual, CharSeparator);
+			actual.Is(PreInputted, ExpectedString, " ", CharSeparator);
 
 			actual = PreInputted.ToStringBuilder();
-			sample.AppendToStringBuilder(actual, "ばらし");
-			actual.Is(PreInputted, ExpectedString, " ", "ばらし");
-
+			sample.AppendToStringBuilder(actual, StringSeparator);
+			actual.Is(PreInputted, ExpectedString, " ",StringSeparator);
 		}
+
+		[Fact]
+		public void ObjectArrayTest()
+		{
+			var sample = new object[] { 42, "hello", true };
+
+			var actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, CharSeparator);
+			actual.Is(PreInputted, string.Join(" ",sample), " ", CharSeparator);
+
+			actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, StringSeparator);
+			actual.Is(PreInputted, string.Join(" ",sample)," ", StringSeparator);
+		}
+
+		[Fact]
+		public void StringReadonlySpanTest()
+		{
+			ReadOnlySpan<string> sample = ExpectedString.Split(' ');
+
+			var actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, CharSeparator);
+			actual.Is(PreInputted, ExpectedString, " ", CharSeparator);
+
+			actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, StringSeparator);
+			actual.Is(PreInputted, ExpectedString, " ", StringSeparator);
+		}
+
+		[Fact]
+		public void StringReadonlyMemoryTest()
+		{
+			ReadOnlyMemory<string> sample = ExpectedString.Split(' ');
+
+			var actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, CharSeparator);
+			actual.Is(PreInputted, ExpectedString, " ", CharSeparator);
+
+			actual = PreInputted.ToStringBuilder();
+			sample.AppendToStringBuilder(actual, StringSeparator);
+			actual.Is(PreInputted, ExpectedString, " ", StringSeparator);
+		}
+
+
 
 
 		[Fact]
 		public void JoinedAppendTest()
 		{
-			var expected = PreInputted + ExpectedString.Replace(' ', '\t');
+			var expected = PreInputted + ExpectedString.Replace(' ', CharSeparator);
 			var bld = PreInputted.ToStringBuilder();
 
 			StringBuilder reset()

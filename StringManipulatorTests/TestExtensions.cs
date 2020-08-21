@@ -27,6 +27,9 @@ namespace Tokeiya3.StringManipulatorTests
 			}
 		}
 
+		public static void Is(this StringBuilder actual, string expected, string delimiter, char separator)
+			=> actual.Is(expected, delimiter, separator.ToString());
+
 		public static void Is(this StringBuilder actual, string pre, string expected, string delimiter,
 			string separator)
 		{
@@ -38,5 +41,9 @@ namespace Tokeiya3.StringManipulatorTests
 				actual[i].Is(tmp[i]);
 			}
 		}
+
+		public static void Is(this StringBuilder actual, string pre, string expected, string delimiter, char separator) =>
+			actual.Is(pre, expected, delimiter, separator.ToString());
+
 	}
 }
